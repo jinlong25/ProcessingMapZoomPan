@@ -1,19 +1,28 @@
-/*Zoom and Pan in Processing
+/*Map Zoom and Pan in Processing
 Author: Jinlong Yang
 Email: jinlong.yang@mail.sdsu.edu
 */
 
-//Define the image vars
+/*When use the code, you may change
+the zoomFactor to have finer/coarser
+zooming, or change the maxScale to
+limit the most detailed level of zooming
+*/
+
+//Define the map vars
 PImage map;
+
 int imgW;
 int imgH;
 int centerX;
 int centerY;
 
+
 //Define the zoom vars
 int scale = 1;
 int maxScale = 10;
 float zoomFactor = 0.4;
+
 
 //Define the pan vars
 int panFromX;
@@ -26,29 +35,22 @@ int yShift = 0;
 
 void setup() {
   map = loadImage("image.jpg");
-  
   imgW = map.width;
   imgH = map.height;
   centerX = imgW / 2;
   centerY = imgH / 2;
-  
   size(800, 600);
-  //size(1024, 683);
 }
 
 
 void draw(){
   background(0);
-  //imageMode(CENTER);
-  image(map, centerX - imgW / 2, centerY - imgH / 2, imgW, imgH);
-  
-  println("imgW/2: ", imgW / 2);
-  //println(" |  imgH/2: ", imgH / 2);
-  println("centerX: ", centerX);
-  //println(" |  centerY: ", centerY);
+  imageMode(CENTER);
+  image(map, centerX, centerY, imgW, imgH);
 }
 
 
+//Pan function
 void mousePressed(){
   if (mouseButton == LEFT){
     panFromX = mouseX;
@@ -57,6 +59,7 @@ void mousePressed(){
 }
 
 
+//Pan function continued..
 void mouseDragged(){
   if (mouseButton == LEFT){
     panToX = mouseX;
@@ -65,6 +68,7 @@ void mouseDragged(){
     xShift = panToX - panFromX; 
     yShift = panToY - panFromY;
     
+    //Only pan with the image occupies the whole display
     if(centerX - imgW / 2 <= 0
     && centerX + imgW / 2 >= width
     && centerY - imgH / 2 <= 0
@@ -73,6 +77,7 @@ void mouseDragged(){
       centerY = centerY + yShift;
     }
     
+    //Set the constraints for pan
     if(centerX - imgW / 2 > 0){
       centerX = imgW / 2;
     }
@@ -94,14 +99,14 @@ void mouseDragged(){
   }
 }
 
+
 //Zoom function
 void mouseWheel(MouseEvent event) {
   float e = event.getAmount();
   
   //Zoom in
   if(e == -1){
-    if(scale < maxScale
-    ){
+    if(scale < maxScale){
       scale++;
       imgW = int(imgW * (1+zoomFactor));
       imgH = int(imgH * (1+zoomFactor));
