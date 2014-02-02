@@ -52,7 +52,7 @@ void draw(){
 
 //Pan function
 void mousePressed(){
-  if (mouseButton == LEFT){
+  if(mouseButton == LEFT){
     panFromX = mouseX;
     panFromY = mouseY;
   }
@@ -61,7 +61,7 @@ void mousePressed(){
 
 //Pan function continued..
 void mouseDragged(){
-  if (mouseButton == LEFT){
+  if(mouseButton == LEFT){
     panToX = mouseX;
     panToY = mouseY;
     
