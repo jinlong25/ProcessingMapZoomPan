@@ -39,8 +39,8 @@ void setup() {
 
 void draw(){
   background(0);
-  imageMode(CENTER);
-  image(map, centerX, centerY, imgW, imgH);
+  //imageMode(CENTER);
+  image(map, centerX - imgW / 2, centerY - imgH / 2, imgW, imgH);
   
   println("imgW/2: ", imgW / 2);
   //println(" |  imgH/2: ", imgH / 2);
