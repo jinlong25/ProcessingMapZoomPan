@@ -7,7 +7,7 @@ Email: jinlong.yang@mail.sdsu.edu
 the zoomFactor to have finer/coarser
 zooming, or change the maxScale to
 limit the most detailed level of zooming
-*/
+allowed.*/
 
 //Define the map vars
 PImage map;
